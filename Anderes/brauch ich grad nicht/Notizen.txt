@@ -1,0 +1,16 @@
+Latein:
+
+Latein -> Deutsch
+Latein: Ausgangssprache
+Deutsch: Zielsprache
+Zu lernende Sprache: Latein
+
+
+
+Englisch:
+
+Deutsch -> Englisch 
+Deutsch: Ausgangssprache
+Englisch: Zielsprache
+Zu lernende Sprache: Englisch
+

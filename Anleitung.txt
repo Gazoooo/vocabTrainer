@@ -1,0 +1,36 @@
+1. Die Fenster
+
+Es gibt 3 Fenster: 
+	1. Das Auswahlmenü -> Hier wählen Sie die gewünschte Sprache aus
+	2. Vokabeltrainer -> Hier können Sie die Vokabeln in der DB lernen. Näheres hierzu finden Sie unter 2.
+	3. Vokabelliste -> Hier können sie alle Vokabeln der DB einsehen. Näheres hierzu finden sie unter 4.
+
+2. Der Vokabeltrainer:
+
+Wählen Sie eine beliebige Sprache im Auswahlmenü aus,um zum jeweiligen Vokabeltrainer zu gelangen. 
+Das sich öffnende Fenster hat verschiedene Knöpfe und Funktionen:
+	1. "Vorherige Vokabel": Die vorherige Vokabel wird angezeigt. Die Funktion kann nur 1 vorherige Vokabel anzeigen.
+	2. "Neue Vokabel": Eine zufällige, neue Vokabel wird angezeigt.
+	3. "Merken": Die momentane Vokabel wird sich gemerkt. Die gemerkte Vokabel kommmt in die Merkliste.  
+	4. "Lösung anzeigen": Die Lösung der momentanen Vokabel wird angezeigt. 
+	5. Vokabeln wiederholen": Wiederholt die Vokabeln der Merkliste.
+	6. "Reset": Alles wird zurückgesetzt.
+	7. "Zur Vokabelliste": Das Fenster "Vokabelliste" wird geöffnet. (Der Vokabeltrainer wird nicht geschlossen.)
+
+3. Die Vokabelliste: 
+
+Die Vokabelliste beinhaltet alle Vokabeln (+ Übersetzung) der jeweiligen DB. 
+Das sich öffnende Fenster hat verschiedene Knöpfe und Funktionen:
+	1. "Nächste Zeile": Die jeweilig nächste Vokabel der DB wird mit zugehörigen Stammformen und Übersetzung angezeigt.
+	2. "Alles anzeigen": Auf einen Klickwerden alle Vokabeln, Stammformen und Übersetzungen der DB angezeigt.
+	3. "Vokabel suchen": Eine Suchfunktion -> In dem Textfeld darunter kann eine Vokabel (oder Bruchteile davon) eingeben. 
+	Mit einem Klick auf den Such-Knopf werden alle angezeigten Vokabeln, Stammformen und Übersetzungen durchsucht. 
+	Bei Treffer in der Ausgangssprche werden diese gelb gekennzeichnet. Bei Treffer in der Zielsprache werden diese blau gekennzeichnet.
+
+4. Ändern der abgefragten Vokabeln:
+
+Die Vokabeln, welche abgefragt werden, werden in einer SQL - Datenbank gespeichert. Diese befindet sich unter "sources/Vokabeln.db". Diese Datei lässt sich durch
+Doppelklick öffnen. Jede Tabelle verfügt über die Spalten "ID", "Deutsch" und die jeweilige Fremdsprache.
+	1. Nun geht man auf den Reiter "Daten durchsuchen" und findet eine Tabelle vor. 
+	2. Zwischen den Tabellen für die verschiedenen Sprachen lässt sich in einem Dropdown - Menü über der eigentlichen Tabelle wechseln.
+	3. Die einzelnen Zeilen der Tabelle lassen sich durch Doppelklick auf die jeweilige Zelle beliebig bearbeiten.
