@@ -2,11 +2,24 @@ import tkinter as tk
 import tkinter.scrolledtext as st
 import tools as tools
 
-# komplettes 2. Fenster wird innerhalb einer Klasse erstellt
-class Vokabelliste:
-    def __init__(self, zu_lernende_sprache, uebersetzungsrichtung): #Die verschiedenen Parameter bestimmt, welche Sprache in welche Richtung gelernt wird
 
-        #Variablen werden deklariert
+
+class Vokabelliste:
+    """
+    A class representing a vocabulary list for language learning.
+
+    This class creates a GUI window that displays a list of vocabulary words in two languages
+    and allows the user to navigate, search, and display the vocabulary.
+    """
+    
+    def __init__(self, zu_lernende_sprache, uebersetzungsrichtung): 
+        """
+        Initializes the vocabulary list window with the provided languages.
+
+        Args:
+            zu_lernende_sprache (str): The language to be learned.
+            uebersetzungsrichtung (tuple): A tuple containing the source and target languages (in this order).
+        """
         self.vokabel_ID = 0
 
         self.displayed_all = False
@@ -82,19 +95,32 @@ class Vokabelliste:
         self.Vokabelanzeige_ausgangssprache.bind("<MouseWheel>", self.scrollen_mausrad)
         self.Fenster2.bind("<MouseWheel>", self.scrollen_mausrad)
 
-    def scrollen_mausrad(self,event): #"event" wird der Funktion bei jeder Betaetigung des Mausrades mit der x und y Koordinate des Cursors uebergeben
+    def scrollen_mausrad(self,event): 
+        """
+        Handles scrolling using the mouse wheel for both vocabulary columns.
+
+        Args:
+            event (tk.Event): The event object containing the mouse wheel information.
+        """
         self.Vokabelanzeige_ausgangssprache.yview_scroll(int(-1*(event.delta/120)), "units") #"event" uebergibt neben x und y auch delta, welches durch das Vorzeichen angibt, in welche Richtung gescrollt wird (120 oder -120)
         self.Vokabelanzeige_zielsprache.yview_scroll(int(-1*(event.delta/120)), "units") #fuer die yview_scroll Funktion muss der Parameter (OS spezifisch(?))  abgeaendert werden
         return "break" #dadurch lassen sich die Textfelder nicht mehr ohne eine zugewiesene Funktion scrollen (Bei Tkinter kann man Textfelder auch so scrollen, wenn amn mit der Maus darauf zeigt)
 
+    def scrollen_scrollbar(self,*args):
+        """
+        Handles scrolling using the scrollbar for both vocabulary columns.
 
-    def scrollen_scrollbar(self,*args): #der *args Parameter kann auch 2 oder mehrere Parameter enthalten
-        print (*args)
+        Args:
+            *args: Variable arguments passed by the scrollbar widget.
+        """
         self.Vokabelanzeige_ausgangssprache.yview(*args) #der .yview Befehl bewirkt, dass gescrollt wird
         self.Vokabelanzeige_zielsprache.yview(*args)
 
     def naechste_vokabelzeile_anzeigen(self):
-
+        """
+        Displays the next vocabulary word in the list.
+        If all words have been displayed, it resets the list and prepares for a new cycle.
+        """
         if self.displayed_all: #Falls schon alle Vokabeln durch "alles anzeigen" angezeigt sind:
             tools.text_loeschen(self.Vokabelanzeige_ausgangssprache, self.Vokabelanzeige_zielsprache)
             self.vokabel_ID = 0
@@ -111,7 +137,10 @@ class Vokabelliste:
             self.vokabelzaehler2.set("Das waren alle Vokabeln.")
 
     def alles_anzeigen(self):
-
+        """
+        Displays all vocabulary words in the list.
+        The entire vocabulary list is displayed at once, without navigation.
+        """
         self.displayed_all = True
         tools.text_loeschen(self.Vokabelanzeige_ausgangssprache,self.Vokabelanzeige_zielsprache)
         for i in range(1, tools.anzahl_vokabeln_insgesamt(self.zu_lernende_sprache) + 1):  #führe nabchfolgende Befehle pro Vokabel aus
@@ -120,6 +149,14 @@ class Vokabelliste:
         self.vokabelzaehler2.set("Alle Vokabeln angezeigt.")
 
     def Suchen(self):
+        """
+        Searches for a word in the vocabulary and highlights it in both languages.
+
+        The search is case-sensitive and highlights all occurrences of the word in both the
+        source and target language columns.
+
+        If no word is found, no action is performed.
+        """
         wort = str(self.vokabel_suchfeld.get())
         self.vokabel_suchfeld.delete(0,"end")
         self.Vokabelanzeige_ausgangssprache.tag_configure('Ausgangssprache', background='#737F00')

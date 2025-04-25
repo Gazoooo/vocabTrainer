@@ -3,10 +3,23 @@ import tkinter as tk
 import Vokabelliste
 import tools as tools
 
-# komplettes 1. Fenster wird innerhalb einer Klasse erstellt
+
+
 class Vokabeltrainer:
-    def __init__(self, zu_lernende_sprache, uebersetzungsrichtung): #Der "sprache" Parameter bestimmt, welche Sprache gelernt wird
-        # Variablen werden deklariert
+    """
+    A class for creating a vocabulary trainer application using Tkinter.
+    """
+    
+    def __init__(self, zu_lernende_sprache, uebersetzungsrichtung):
+        """
+        Initializes the Vokabeltrainer object.
+
+        Parameters:
+            zu_lernende_sprache : str
+                The language to be learned.
+            uebersetzungsrichtung : tuple
+                A tuple indicating the translation direction (source language, target language).
+        """
         self.uebersetzungsrichtung = uebersetzungsrichtung
         self.zu_lernende_sprache = zu_lernende_sprache
         self.ausgangssprache = uebersetzungsrichtung[0]
@@ -73,19 +86,25 @@ class Vokabeltrainer:
         self.wiederholen = tk.Button(self.Fenster, text="Vokabeln wiederholen", font=("Arial", 20), bg="#262626", fg="white", width=20, command=self.wdh)
         self.wiederholen.place(x=650, y=200)
 
-    # Funktion zum Starten vom 1. Fenster, in "starten.py" benutzt
     def start(self):
+        """
+        Starts the Tkinter mainloop for the application.
+        """
         self.Fenster.mainloop()
 
-
-    # Funktionen, welche durch Buttons ausgeloest werden, werden nachfolgend definiert:
-
     def zur_vokabelliste(self):
-        Vokabelliste.Vokabelliste(self.zu_lernende_sprache, self.uebersetzungsrichtung) #bewirkt einen Fensterwechsel zu der Vokabelliste
+        """
+        Opens the vocabulary list window, where the user can view and manage their vocabulary.
+        """
+        Vokabelliste.Vokabelliste(self.zu_lernende_sprache, self.uebersetzungsrichtung)
 
     def vokabel_anzeigen(self):
-
-        # Durch eine if-Abfrage wird sichergestellt, dass jede Vokabel (pro Durchgang) nur einmal abgefragt wird.
+        """
+        Displays a new random word from the vocabulary list.
+        Ensures that each word is only asked once per round.
+        If all words have been asked, starts a new round.
+        """
+        # es wird sichergestellt, dass jede Vokabel (pro Durchgang) nur einmal abgefragt wird.
         if len(self.vokabelliste) == 0:
             self.anzahl_durchgang += 1
             tools.text_bearbeiten(self.Vokabelfeld,f'Du bist alle Vokabeln nun {self.anzahl_durchgang}-mal durchgegangen.\nDrücke "Neue Vokabel", um mit dem nächsten Durchgang zu starten.')
@@ -104,9 +123,11 @@ class Vokabeltrainer:
             else:
                 tools.text_bearbeiten(self.loesungsfeld, 'Lasse dir erst die Lösung der aktuellen Vokabel anzeigen.','warning')
 
-
     def loesung_anzeigen(self):
-
+        """
+        Shows the translation of the current word. If the current word has no translation,
+        a warning message is displayed.
+        """
         tools.text_loeschen(self.loesungsfeld)
         wort = self.Vokabelfeld.get("1.0","end").rstrip('\n').replace('"','')
         if self.Vokabelfeld.compare("end-1c", "!=", "1.0") and tools.uebersetzung(self.zu_lernende_sprache,self.ausgangssprache,self.zielsprache,wort) != None: # wenn das Vokabelfeld nicht leer ist und das jeweilige wort in der DB ist:...
@@ -118,9 +139,10 @@ class Vokabeltrainer:
         else:
             tools.text_bearbeiten(self.loesungsfeld,'Drücke erst die Taste "Neue Vokabel".', "warning")
 
-
     def Reset(self):
-
+        """
+        Resets the application, clearing the current round's data and settings.
+        """
         tools.text_loeschen(self.Vokabelfeld, self.loesungsfeld)
         if self.schwierige_vokabeln != []: #wenn sich noch keine Vokabeln gemerkt wurden
             tools.text_bearbeiten(self.Vokabelfeld,'Wiederhole vor dem Reset noch die Vokabeln.')
@@ -129,9 +151,11 @@ class Vokabeltrainer:
             self.zaehler_pro_durchgang = 0
             self.anzahl_durchgang = 0
 
-    # durch die Funktion "Merken" und "wdh" ist es trotz zufaelliger Auswahl der Vokabeln dem User moeglich, Vokabeln zu wiederholen
     def Merken(self):
-
+        """
+        Marks the current word as difficult for later repetition.
+        If the word is already in the difficult list, a warning is displayed.
+        """
         wort = str(self.Vokabelfeld.get("1.0", "end").rstrip('\n').replace('"',''))
         if self.Vokabelfeld.compare("end-1c", "!=", "1.0") and self.loesungsfeld.compare("end-1c", "!=", "1.0"): #s. o.
             vokabel = self.Vokabelfeld.get("1.0", "end")
@@ -150,9 +174,11 @@ class Vokabeltrainer:
             tools.text_loeschen(self.loesungsfeld)
             tools.text_bearbeiten(self.loesungsfeld,'Drücke erst auf "Neue Vokabel", um eine Vokabel anzuzeigen.', 'warning')
 
-
     def wdh(self):
-
+        """
+        Repeats a previously marked difficult word.
+        If no difficult words exist, a warning is displayed.
+        """
         if self.schwierige_vokabeln != []:
             if self.loesungsfeld.compare("end-1c", "!=", "1.0") or ("gemerkt" in self.Vokabelfeld.get("1.0", "end")): #es soll nur eine Warnung (s. u.) ausgegeben werden, wenn der User die Loesung nicht angeguckt hat oder er davor die Taste "Merken" gedrueckt hat.
                 tools.text_loeschen(self.Vokabelfeld, self.loesungsfeld)
@@ -169,9 +195,11 @@ class Vokabeltrainer:
             tools.text_loeschen(self.loesungsfeld)
             tools.text_bearbeiten(self.loesungsfeld,'Druecke erst auf "Merken", um Vokabeln zu wiederholen.', "warning")
 
-
     def back(self):
-
+        """
+        Goes back to the previous word in the current session.
+        If the current word has not been learned yet, a warning is displayed.
+        """
         if self.loesungsfeld.compare("end-1c", "!=", "1.0") or "gemerkt" in self.Vokabelfeld.get("1.0","end"): #falls man "back" ausfuehrt, ohne zuvor die jetzige Vokabel gelernt zu haben, geht diese "verloren"
             jetzige_vokabel = self.Vokabelfeld.get("1.0", "end").rstrip("\n")
             if "gemerkt" in jetzige_vokabel: #falls mehr als die Vokabel im Textfeld steht, soll nur die Vokabel an sich genommen werden (Das wäre der Fall, wenn man sich direkt davor eine Vokabel gemerkt hat.)
