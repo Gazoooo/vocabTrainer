@@ -22,7 +22,9 @@ class auswahlmenue:
         self.x = 0
         self.Fenster0 = tk.Tk()
         self.Fenster0.title("Auswahlmenü")
-        self.Fenster0.iconbitmap((tools.find_source_path("Translation.ico")))
+        self.icon_image = tk.PhotoImage(file=tools.find_source_path("Translation.png"))
+
+        self.Fenster0.iconphoto(True, self.icon_image)
         self.Hoehe_Fenster = 800
         self.Breite_Fenster = 800
         self.Breite_Monitor = self.Fenster0.winfo_screenwidth()

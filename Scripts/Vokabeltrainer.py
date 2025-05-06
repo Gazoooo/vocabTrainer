@@ -41,7 +41,8 @@ class Vokabeltrainer:
         self.Fenster.geometry(f"{self.Breite_Fenster}x{self.Hoehe_Fenster}+{int(self.x)}+{int(self.y)}")
         self.Fenster.title("Vokabeltrainer")
         self.Fenster.configure(bg="#181818")
-        self.Fenster.iconbitmap((tools.find_source_path(f"{self.zu_lernende_sprache}.ico")))
+        self.icon_image = tk.PhotoImage(file=tools.find_source_path(f"{self.zu_lernende_sprache}.png"))
+        self.Fenster.iconphoto(True, self.icon_image)
 
         # Variablen fuer Labels werden erstellt
         self.zaehler = tk.StringVar()

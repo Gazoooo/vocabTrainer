@@ -22,18 +22,22 @@ This is a python program to help you learn vocabulary.
 </details>
 
 ## 🌟 Highlights <a id="highlights"></a>
-- supports english, french and latin
+- supports english, french, latin and ancient greek
 - freely add your own vocabs by editing the database
 
 ## ▶️ Usage <a id="usage"></a>
 > a detailed guide with all functionality in german is in the `Anleitung.txt`
 
 ![Screenshot](demo.png)
-1. Choose your desired database 
-2. Config test with lection, nummer of words and part of speech
-3. Hit "Konfiguration bestätigen"
-4. You can add more lections as you want (up to 15)
-5. A new `.txt` and `.docx` containing your new test will be created in a (maybe newly created) directory `Output`
+
+1. Choose your desired language to learn
+2. You can either:
+   1. show next vocab
+   2. show previous vocab
+   3. remember current vocab
+   4. revise remembered vocabs
+   5. reset
+   6. see the whole lsit of vocabs
 
 ## 🛠️ Setup <a id="setup"></a>
 This little guide will guide you to setup this programm on your local machine.
@@ -52,12 +56,12 @@ Before installing or using this project, make sure the following are available o
 If you have fullfilled all the requirements listed above, you can either:
 1. build yourself with these commands:
 ```bash
-git clone https://github.com/Gazoooo/Create_vocabTest.git # clone repo
-cd Create_vocabTest # navigate to project directory
+git clone https://github.com/Gazoooo/vocabTrainer.git # clone repo
+cd vocabTrainer # navigate to project directory
 pip install -r requirements.txt # install the necessary packages
 python Scripts/main.py # run the script
 ```
-2. (Only for windows) Run the `installer/install.bat` file to automatically install python in project's directory. After this, you can simpy run `execute.py` to run the Script or execute `new_DB.bat` to create a new database.
+2. (Only for windows) Run the `installer/install.bat` file to automatically install python in project's directory. After this, you can simpy run `execute.py` to run the Script.
 
 ## 💭 Feedback <a id="feedback"></a>
 I created this project myself and really appreciate any feedback!  

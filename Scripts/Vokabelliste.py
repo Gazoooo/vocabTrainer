@@ -40,7 +40,8 @@ class Vokabelliste:
 
         self.Fenster2.title("Vokabelliste")
         self.Fenster2.configure(bg="#181818")
-        self.Fenster2.iconbitmap((tools.find_source_path("vocabulary-list.ico")))
+        self.icon_image = tk.PhotoImage(file=tools.find_source_path("vocabulary-list.png"))
+        self.Fenster2.iconphoto(True, self.icon_image)
 
 
         self.count = tk.StringVar() #Variable fuer das Markieren der gesuchten Vokabel in der Ausgangssprache
